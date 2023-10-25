@@ -1,3 +1,4 @@
+import static java.lang.Double.parseDouble;
 import static java.lang.Math.random;
 import java.util.Scanner;
 public class Main {
@@ -19,12 +20,9 @@ public class Main {
         }
 
         if(wybor.equals("2")){
-            System.out.println("Wpisz dlugosc tablicy: ");
-            sizeOfArray = scanner.nextInt();
-            doubleArray = new double[sizeOfArray];
             for(int i = 0; i < doubleArray.length;i++){
                 System.out.println("Wpisz dane do tablicy: ");
-                doubleArray[i] = scanner.nextInt();
+                doubleArray[i] = loadNumber();
             }
             insertionSort(doubleArray);
             printArray(doubleArray);
@@ -56,5 +54,32 @@ public class Main {
 
     }
 
+
+//    public static double loadNumber(Scanner scanner){
+//        if(scanner.hasNextDouble()){
+//          return scanner.nextDouble();
+//        }
+//        else System.out.println("To nie jest liczba");
+//        return 0;
+//    }
+
+    public static double loadNumber(){
+        Scanner scanner = new Scanner(System.in);
+        String strNumber = scanner.nextLine();
+        boolean isNumber = true;
+        for(int i = 0; i < strNumber.length(); i++){
+            if(strNumber.charAt(i) < 48 || strNumber.charAt(i) > 57){
+                System.out.println("To nie jest liczba");
+                isNumber = false;
+                break;
+            }
+        }
+        if(isNumber){
+            return parseDouble(strNumber);
+        }else{
+            System.out.println("podaj liczbe");
+            return loadNumber();
+        }
+    }
 
 }
